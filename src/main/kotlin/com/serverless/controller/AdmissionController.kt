@@ -3,6 +3,8 @@ package com.serverless.controller
 import com.google.gson.Gson
 import com.serverless.model.Admission
 import com.serverless.request.CreateAdmissionRequest
+import com.serverless.request.DeleteAdmissionRequest
+import com.serverless.request.UpdateAdmissionRequest
 import com.serverless.response.BaseResponse
 import com.serverless.response.ListResponse
 import com.serverless.service.AdmissionService
@@ -11,9 +13,11 @@ class AdmissionController {
     //private  val clientService:ClientService= ClientService()
     private val admissionService = AdmissionService()
 
-    fun createAdmissionTable() {
+    fun createAdmissionTable(): Any {
        // clientService.createClientsTable()
-        admissionService.createAdmissionTable()
+      return runSafelyTrans {
+          admissionService.createAdmissionTable()
+      }
 
     }
 
@@ -26,18 +30,22 @@ class AdmissionController {
 
 //        val client = Client(0,createClientRequest.client_name,createClientRequest.address,createClientRequest.industry)
 //        clientService.createClientsService(client)
-        admissionService.createAdmissionService(admission)
-        return BaseResponse("00","admission created sucesfully")
+      return runSafelyTrans {
+          admissionService.createAdmissionService(admission)
+          return BaseResponse("00","admission created sucesfully")
+      }
 //
     }
-//    fun UpdateClients(request: String):Any{
-//        val updateClientRequest = Gson().fromJson(request, UpdateClientRequest::class.java)
-//        val client = Client(updateClientRequest.client_id!!.toInt(),updateClientRequest.client_name,updateClientRequest.address,updateClientRequest.industry)
-//
-//        clientService.updateClientsTable(client)
-//
-//        return BaseResponse("00","client updated sucesfully")
-//    }
+    fun UpdateAdmission(request: String):Any{
+        val updateAdmissionRequest = Gson().fromJson(request, UpdateAdmissionRequest::class.java)
+        val admission = Admission(updateAdmissionRequest.admission_id,updateAdmissionRequest.admisssion_type,updateAdmissionRequest.admission_status,updateAdmissionRequest.admission_description)
+        return runSafelyTrans {
+            admissionService.updateAdmissionTable(admission)
+
+            return BaseResponse("00","admission updated sucesfully")
+        }
+    }
+
 //
 //
 //    fun selectAllClients():Any{
@@ -45,13 +53,26 @@ class AdmissionController {
 //        return ListResponse("00","successful",clients)
 //    }
     fun selectAllAdmission(): Any{
-        val admission = admissionService.selectAllAdmission()
-        return ListResponse("00","successful",admission)
+       return runSafelyTrans {
+           val admission = admissionService.selectAllAdmission()
+           return ListResponse("00","successful",admission)
+       }
     }
 //
-//    fun deleteClients(request: String):Any{
-//        val deleteClientRequest = Gson().fromJson(request, DeleteClientRequest::class.java)
-//        clientService.deleteClientsTable(client_id = deleteClientRequest.client_id!!.toInt())
-//        return BaseResponse("00","client deleted sucesfully")
-//    }
+    fun deleteAdmission(request: String):Any{
+        val deleteAdmissionRequest = Gson().fromJson(request, DeleteAdmissionRequest::class.java)
+       return runSafelyTrans {
+           admissionService.deleteAdmissionTable(admission_id = deleteAdmissionRequest.admission_id!!.toInt())
+           return BaseResponse("00","admission deleted sucesfully")
+       }
+    }
+    private inline fun runSafelyTrans(action: () ->Unit): Any{
+        return try{
+            action()
+        }catch (t: Throwable){
+            BaseResponse("98", "${t.message}")
+        }finally {
+
+        }
+    }
 }

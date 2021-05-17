@@ -5,6 +5,7 @@ import com.amazonaws.services.lambda.runtime.LambdaLogger
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler
 import com.google.gson.Gson
 import com.serverless.controller.*
+import com.serverless.controller.AdmissionController
 
 import com.serverless.lambda.request.AWSLambdaRequest
 import com.serverless.lambda.response.AwsLambdaResponse
@@ -27,7 +28,7 @@ class Handler: RequestStreamHandler {
     logger.log("handleRequest: Handling incoming task request. Input: ${request.body}")
     val path = request.pathParameters.proxy
     println(path)
-    val admissionController = AdmissionController()
+    val admissionController =AdmissionController()
 ////    val merchant: MerchantController by KoinJavaComponent.inject(MerchantController::class.java)
 ////    val customer: CustomerController by KoinJavaComponent.inject(CustomerController::class.java)
 ////    val receipts: ReceiptController by KoinJavaComponent.inject(ReceiptController::class.java)
@@ -38,6 +39,9 @@ class Handler: RequestStreamHandler {
       //"admission/all"
      // "client/create" ->  client.createClient(request.body)
       "admission/create" -> admissionController.createAdmission(request.body)
+      "admission/all" -> admissionController.selectAllAdmission()
+      "admission/update" -> admissionController.UpdateAdmission(request.body)
+      "admission/delete" -> admissionController.deleteAdmission(request.body)
 //      "person/createprofile" ->  person.createRubiesProfile(request.body)
 //      "person/all" -> person.getAllPersons()
 //      "person/findall" -> person.getAllAgentsCustomerid(request.body)

@@ -2,7 +2,7 @@ package com.serverless.request
 
 import javax.validation.constraints.NotEmpty
 
-class SelectAllRequest (
+data class SelectAllRequest (
     @get:NotEmpty(message = "admission id is required")
     val admission_id: Int?,
     @get:NotEmpty(message = "admission type is required")

@@ -83,9 +83,11 @@ class AdmissionRepositoryImplementation: AdmissionRepository {
         try {
             val sql = "UPDATE admission SET admission_type = ?,admission_status=?, admission_description=? WHERE admission_id = ? ;"
             val pstmt = connection?.prepareStatement(sql)
+
             pstmt?.setString(1, admission.admisssion_type)
             pstmt?.setString(2, admission.admission_status)
             pstmt?.setString(3, admission.admission_description)
+            pstmt?.setInt(4, admission.admission_id!!)
             pstmt?.executeUpdate()
             print("query ran successfully")
         } catch (ex: SQLException) {
