@@ -22,7 +22,7 @@ class AdmissionRepositoryImplementation: AdmissionRepository {
     //var pstmt: PreparedStatement? = null
 
     override fun createAdmissionTable() {
-        val sql = "CREATE TABLE IF NOT EXISTS client\n" +
+        val sql = "CREATE TABLE IF NOT EXISTS admission\n" +
                 " (client_id INT PRIMARY KEY AUTO_INCREMENT ,\n" +
                 "  admission_type VARCHAR(40) NOT NULL,\n" +
                 "  admission_status VARCHAR(60) NOT NULL,\n" +
@@ -128,7 +128,7 @@ class AdmissionRepositoryImplementation: AdmissionRepository {
 
     override fun deleteAdmission(admission_id: Int) {
         val sql =
-            " DELETE FROM  Admission  WHERE admission_id=?;"
+            " DELETE FROM  admission  WHERE admission_id=?;"
         val preparedStatement = connection?.prepareStatement(sql)
         try {
             preparedStatement?.setInt(1,admission_id)

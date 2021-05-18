@@ -16,7 +16,8 @@ class AdmissionController {
     fun createAdmissionTable(): Any {
        // clientService.createClientsTable()
       return runSafelyTrans {
-          admissionService.createAdmissionTable()
+         // admissionService.createAdmissionTable()
+
       }
 
     }
@@ -58,6 +59,18 @@ class AdmissionController {
            return ListResponse("00","successful",admission)
        }
     }
+//    fun selectAllAdmission(): Any{
+//        try{
+//            val admission = admissionService.selectAllAdmission()
+//            return ListResponse("00","successful",admission)
+//        }catch(ex:SQLException){
+//
+//        }catch(e:TypeCastException){
+//
+//        }catch(e:Exception){
+//  
+//        }catch(e:class)
+//    }
 //
     fun deleteAdmission(request: String):Any{
         val deleteAdmissionRequest = Gson().fromJson(request, DeleteAdmissionRequest::class.java)
