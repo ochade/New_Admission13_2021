@@ -1,13 +1,12 @@
 package com.serverless.service
 
-import com.serverless.model.ApplicantModel
-import com.serverless.repository.AdmissionRepositoryImplementation
+import com.serverless.repository.ApplicantRepositoryImplementation
 
 class ApplicantService {
-    private val admissionRepositoryImplementation: AdmissionRepositoryImplementation = AdmissionRepositoryImplementation()
+    private val applicantRepositoryImplementation: ApplicantRepositoryImplementation = ApplicantRepositoryImplementation()
 
     fun createApplicationTable(){
-        admissionRepositoryImplementation.createAdmissionTable()
+        applicantRepositoryImplementation.createApplicantTable()
     }
 
 }

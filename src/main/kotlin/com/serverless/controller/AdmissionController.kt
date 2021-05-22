@@ -16,7 +16,7 @@ class AdmissionController {
     fun createAdmissionTable(): Any {
        // clientService.createClientsTable()
       return runSafelyTrans {
-         // admissionService.createAdmissionTable()
+         admissionService.createAdmissionTable()
 
       }
 

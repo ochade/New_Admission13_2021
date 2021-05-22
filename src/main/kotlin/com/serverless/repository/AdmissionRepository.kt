@@ -29,7 +29,7 @@ class AdmissionRepositoryImplementation: AdmissionRepository {
                 "  admission_description VARCHAR(20) NOT NULL)"
         val pstmt = connection?.prepareStatement(sql)
         try {
-            pstmt?.executeUpdate()
+            pstmt?.execute()
             print("query ran successfully")
         } catch (ex: SQLException) {
             ex.printStackTrace()

@@ -1,6 +1,6 @@
 package com.serverless.model
 
-class ApplicantModel(
+class Applicant(
     applicant_admission: String?,
     applicant_id: Int?,
     applicant_name: String?,

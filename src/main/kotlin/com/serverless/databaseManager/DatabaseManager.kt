@@ -6,7 +6,7 @@ import java.util.*
 object DatabaseManager {
 
     private var conn: Connection? = null
-    private var username ="CfdOlFdTAQ"
+    private var username = "CfdOlFdTAQ"
     private var password="ECHTrAwW2F"
     private var host = "remotemysql.com"
     private var portnumber = "3306"
@@ -19,7 +19,7 @@ object DatabaseManager {
         connectionProps.put("password", password)
         try {
             Class.forName(drivername)
-            conn = DriverManager.getConnection("jdbc:mysql://$host:$portnumber/$databasename", connectionProps)
+            conn = DriverManager.getConnection("jdbc:mysql://${host}:${portnumber}/${databasename}", connectionProps)
         } catch (ex: SQLException) {
             // handle any errors
             ex.printStackTrace()
