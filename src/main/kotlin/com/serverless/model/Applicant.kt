@@ -1,17 +1,17 @@
 package com.serverless.model
 
-class Applicant(
-    applicant_admission: String?,
-    applicant_id: Int?,
-    applicant_name: String?,
-    applicant_age: Int?,
-    applicant_address:String?,
-    applicant_LGA: String?,
-    applicant_sex: String?,
-    applicant_DOB: String?,
-    applicant_maritalStatus:String?,
-    applicant_citizenship:String?,
-    applicant_religion: String?,
-    applicant_denomination: String?,
+data class Applicant(
+    var applicant_admission: String?,
+    var applicant_id: Int?,
+    var applicant_name: String?,
+    var applicant_age: Int?,
+    var applicant_address: String,
+    var applicant_LGA: String?,
+    var applicant_sex: String?,
+    var applicant_DOB: String?,
+    var applicant_maritalStatus:String?,
+    var applicant_citizenship:String?,
+    var applicant_religion: String?,
+    var applicant_denomination: String?,
 
-)
+    )

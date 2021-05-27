@@ -10,6 +10,7 @@ import java.sql.Statement
 interface ApplicantRepository{
     fun createApplicantTable()
     fun createApplicant(applicant: Applicant)
+    fun updateApplicant(applicant: Applicant)
 }
 class ApplicantRepositoryImplementation: ApplicantRepository{
     var connection: Connection? = DatabaseManager.getConnection()
@@ -52,15 +53,15 @@ class ApplicantRepositoryImplementation: ApplicantRepository{
 
             pstmt?.setString(1, applicant.applicant_admission)
             pstmt?.setString(2, applicant.applicant_name)
-            pstmt?.setString(3, applicant.applicant_age)
-            pstmt?.setString(3, applicant.applicant_address)
-            pstmt?.setString(3, applicant.applicant_LGA)
-            pstmt?.setString(3, applicant.applicant_sex)
-            pstmt?.setString(3, applicant.applicant_DOB)
-            pstmt?.setString(3, applicant.applicant_maritalStatus)
-            pstmt?.setString(3, applicant.applicant_citizenship)
-            pstmt?.setString(3, applicant.applicant_religion)
-            pstmt?.setString(3, applicant.applicant_denomination )
+            pstmt?.setInt(3, applicant.applicant_age!!)
+            pstmt?.setString(4, applicant.applicant_address.toString())
+            pstmt?.setString(5, applicant.applicant_LGA)
+            pstmt?.setString(6, applicant.applicant_sex)
+            pstmt?.setString(7, applicant.applicant_DOB)
+            pstmt?.setString(8, applicant.applicant_maritalStatus)
+            pstmt?.setString(9, applicant.applicant_citizenship)
+            pstmt?.setString(10, applicant.applicant_religion)
+            pstmt?.setString(11, applicant.applicant_denomination )
 
 
             pstmt?.executeUpdate()
@@ -74,6 +75,36 @@ class ApplicantRepositoryImplementation: ApplicantRepository{
             connection = null
         }
 
+
+    }
+
+    override fun updateApplicant(applicant: Applicant) {
+        try {
+            val sql = "UPDATE applicant SET applicant_admission = ?,applicant_id=?, applicant_name=?, applicant_age=?, applicant_address=?, applicant_LGA=?, applicant_sex=?, applicant_DOB=?,applicant_maritalStatus=?, applicant_citizenship=?, applicant_religion=?,  applicant_denomination=?  WHERE admission_id = ? ;"
+            val pstmt = connection?.prepareStatement(sql)
+
+            pstmt?.setString(1, applicant.applicant_admission)
+            pstmt?.setString(2, applicant.applicant_name)
+            pstmt?.setInt(3, applicant.applicant_age!!)
+            pstmt?.setString(4, applicant.applicant_address)
+            pstmt?.setString(5, applicant.applicant_LGA)
+            pstmt?.setString(6, applicant.applicant_sex)
+            pstmt?.setString(7, applicant.applicant_DOB)
+            pstmt?.setString(8, applicant.applicant_maritalStatus)
+            pstmt?.setString(9, applicant.applicant_citizenship)
+            pstmt?.setString(10, applicant.applicant_religion)
+            pstmt?.setString(11, applicant.applicant_denomination )
+            pstmt?.executeUpdate()
+            print("query ran successfully")
+        } catch (ex: SQLException) {
+            ex.printStackTrace()
+        } finally {
+            stmt?.close()
+            connection?.close()
+            stmt = null
+            connection = null
+        }
+    }
 
     }
 }

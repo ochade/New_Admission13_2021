@@ -29,6 +29,7 @@ class Handler: RequestStreamHandler {
     val path = request.pathParameters.proxy
     println(path)
     val admissionController =AdmissionController()
+    val applicantController = ApplicantController()
 ////    val merchant: MerchantController by KoinJavaComponent.inject(MerchantController::class.java)
 ////    val customer: CustomerController by KoinJavaComponent.inject(CustomerController::class.java)
 ////    val receipts: ReceiptController by KoinJavaComponent.inject(ReceiptController::class.java)
@@ -42,6 +43,7 @@ class Handler: RequestStreamHandler {
       "admission/all" -> admissionController.selectAllAdmission()
       "admission/update" -> admissionController.UpdateAdmission(request.body)
       "admission/delete" -> admissionController.deleteAdmission(request.body)
+      "applicant/create" -> applicantController.createApplicant(request.body)
 //      "person/createprofile" ->  person.createRubiesProfile(request.body)
 //      "person/all" -> person.getAllPersons()
 //      "person/findall" -> person.getAllAgentsCustomerid(request.body)
