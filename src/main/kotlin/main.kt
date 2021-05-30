@@ -21,13 +21,15 @@ fun main(args: Array<String>) {
 ////
 //    admissioncontroller.deleteAdmission(deleteAdmissionRequest.toString())
     val applicantController = ApplicantController()
-    applicantController.createApplicantTable()
+//    applicantController.createApplicantTable()
 
     val applicantRequest = CreateApplicantRequest("1","naomi","16","no 4 christiana street","ndokwa east","female","09-01-20021","married","Nigerian","christian","catholic")
 
     val applicant = Applicant(applicantRequest.applicant_admission,5, applicantRequest.applicant_name,
-        applicantRequest.applicant_age?.toInt(), applicantRequest.applicant_address, applicantRequest.applicant_LGA, applicantRequest.applicant_sex, applicantRequest.applicant_maritalStatus, applicantRequest.applicant_citizenship, applicantRequest.applicant_religion, applicantRequest.applicant_denomination)
-    applicantController.createApplicant(applicant)
+        applicantRequest.applicant_age?.toString() , applicantRequest.applicant_address.toString(), applicantRequest.applicant_LGA, applicantRequest.applicant_sex, applicantRequest.applicant_DOB, applicantRequest.applicant_maritalStatus, applicantRequest.applicant_citizenship, applicantRequest.applicant_religion, applicantRequest.applicant_denomination)
+//    applicantController.createApplicant(request)
+//
+
   //  DatabaseManager.getConnection()
 
 }

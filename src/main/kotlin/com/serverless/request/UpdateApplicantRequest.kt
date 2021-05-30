@@ -10,9 +10,9 @@ data class UpdateApplicantRequest(
     @get:NotEmpty(message = "applicant name is required")
     val applicant_name:String?,
     @get:NotEmpty(message = "applicant age is required")
-    val applicant_age:Int?,
+    val applicant_age:String?,
     @get:NotEmpty(message = "applicant address is required")
-    val applicant_address: Int?,
+    val applicant_address:String?,
     @get:NotEmpty(message = "applicant LGA is required")
     val applicant_LGA:String?,
     @get:NotEmpty(message = "applicant sex is required")

@@ -28,7 +28,9 @@ class ApplicantRepositoryImplementation: ApplicantRepository{
                 "  applicant_dob VARCHAR(20) NOT NULL,\n"+
                 "  applicant_maritalStatus VARCHAR(40) NOT NULL,\n" +
                 "  applicant_citizenship VARCHAR(60) NOT NULL,\n" +
-                "  applicant_religion VARCHAR(20) NOT NULL)"
+                "  applicant_religion VARCHAR(20) NOT NULL,\n"+
+                "  applicant_denomination VARCHAR(20) NOT NULL)"
+
 
         val pstmt = connection?.prepareStatement(sql)
         try {
@@ -46,14 +48,14 @@ class ApplicantRepositoryImplementation: ApplicantRepository{
     }
 
     override fun createApplicant(applicant: Applicant) {
-        val sql = "INSERT INTO applicant( applicant_admission, applicant_name, applicant_age, applicant_address, applicant_lga, applicant_sex, applicant_dob, applicant_maritalStatus, applicant_citizenship, applicant_religion ) values (?,?,?,?,?,?,?,?,?,?,?)"
+        val sql = "INSERT INTO applicant( applicant_admission, applicant_name, applicant_age, applicant_address, applicant_lga, applicant_sex, applicant_dob, applicant_maritalStatus, applicant_citizenship, applicant_religion, applicant_denomination ) values (?,?,?,?,?,?,?,?,?,?,?)"
         val pstmt = connection?.prepareStatement(sql)
 
         try {
 
             pstmt?.setString(1, applicant.applicant_admission)
             pstmt?.setString(2, applicant.applicant_name)
-            pstmt?.setInt(3, applicant.applicant_age!!)
+            pstmt?.setString(3, applicant.applicant_age)
             pstmt?.setString(4, applicant.applicant_address.toString())
             pstmt?.setString(5, applicant.applicant_LGA)
             pstmt?.setString(6, applicant.applicant_sex)
@@ -85,7 +87,7 @@ class ApplicantRepositoryImplementation: ApplicantRepository{
 
             pstmt?.setString(1, applicant.applicant_admission)
             pstmt?.setString(2, applicant.applicant_name)
-            pstmt?.setInt(3, applicant.applicant_age!!)
+            pstmt?.setString(3, applicant.applicant_age)
             pstmt?.setString(4, applicant.applicant_address)
             pstmt?.setString(5, applicant.applicant_LGA)
             pstmt?.setString(6, applicant.applicant_sex)
@@ -107,4 +109,3 @@ class ApplicantRepositoryImplementation: ApplicantRepository{
     }
 
     }
-}

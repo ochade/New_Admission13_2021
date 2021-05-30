@@ -2,6 +2,7 @@ package com.serverless.controller
 
 import com.google.gson.Gson
 import com.serverless.model.Applicant
+import com.serverless.request.CreateApplicantRequest
 import com.serverless.request.UpdateAdmissionRequest
 import com.serverless.request.UpdateApplicantRequest
 import com.serverless.response.BaseResponse
@@ -12,33 +13,74 @@ class ApplicantController {
   //  private  val clientService:ClientService= ClientService()
     private  val applicantService: ApplicantService = ApplicantService()
 
-    fun createApplicantTable() {
-      applicantService.createApplicationTable()
+    fun createApplicantTable(): Any { 
+        return runSafelyTrans{
+            applicantService.createApplicationTable()
 //        clientService.createClientsTable()
 
+
+    }  
     }
-  fun createApplicant(applicant: Applicant): Any{
+  fun createApplicant(request:String): Any{
 //        //converting json coming from the handler to my own request class - createclientrequest
     // val createClientRequest = Gson().fromJson(request, CreateClientRequest::class.java)
 //    println(request)
     //val createAdmissionRequest = Gson().fromJson(request, CreateAdmissionRequest::class.java)
    // val admission = Admission(0,createAdmissionRequest.admisssion_type, createAdmissionRequest.admission_status,createAdmissionRequest.admission_description)
-//    val createApplicantRequest = Gson().fromJson(request, CreateApplicantRequest::class.java)
-//    val applicant = Applicant("1",0,"naomi",19,"no 4 christiana street","ndokwa","female","09-01-2002","single","nigeian","christian","catholic")
+    val createApplicantRequest = Gson().fromJson(request, CreateApplicantRequest::class.java)
+    val applicant = Applicant(
+        createApplicantRequest.applicant_admission,
+        0,
+        createApplicantRequest.applicant_name,
+        createApplicantRequest.applicant_age,
+        createApplicantRequest.applicant_address,
+        createApplicantRequest.applicant_LGA,
+        createApplicantRequest.applicant_sex,
+        createApplicantRequest.applicant_DOB,
+        createApplicantRequest.applicant_maritalStatus,
+        createApplicantRequest.applicant_citizenship,
+        createApplicantRequest.applicant_religion,
+        createApplicantRequest.applicant_denomination
+
+    )
 
 
       applicantService.createApplicantService(applicant)
-      return BaseResponse("00","admission created sucesfully")
+      return BaseResponse("00","applicant created sucesfully")
 
 //
   }
-  fun UpdateApplication(request: String):Any{
-    val updateApplicantRequest = Gson().fromJson(request, UpdateApplicantRequest::class.java)
-    val applicant = Applicant(updateApplicantRequest.applicant_admission, updateApplicantRequest.applicant_id,updateApplicantRequest.applicant_name,updateApplicantRequest.applicant_age, updateApplicantRequest.applicant_address, updateApplicantRequest.applicant_LGA, updateApplicantRequest.applicant_sex, updateApplicantRequest.applicant_DOB, updateApplicantRequest.applicant_maritalStatus, updateApplicantRequest.applicant_citizenship, updateApplicantRequest.applicant_religion, updateApplicantRequest.applicant_denomination )
-    return runSafelyTrans {
-      admissionService.updateAdmissionTable(admission)
-      applicantService.
-      return BaseResponse("00","admission updated sucesfully")
+  fun UpdateApplication(request: String):Any {
+      val updateApplicantRequest = Gson().fromJson(request, UpdateApplicantRequest::class.java)
+      val applicant = Applicant(
+          updateApplicantRequest.applicant_admission,
+          updateApplicantRequest.applicant_id,
+          updateApplicantRequest.applicant_name,
+          updateApplicantRequest.applicant_age,
+          updateApplicantRequest.applicant_address,
+          updateApplicantRequest.applicant_LGA,
+          updateApplicantRequest.applicant_sex,
+          updateApplicantRequest.applicant_DOB,
+          updateApplicantRequest.applicant_maritalStatus,
+          updateApplicantRequest.applicant_citizenship,
+          updateApplicantRequest.applicant_religion,
+          updateApplicantRequest.applicant_denomination
+      )
+      return runSafelyTrans {
+          // admissionService.updateAdmissionTable(admission)
+          applicantService.updateApplicationTable(applicant)
+          return BaseResponse("00", "admission updated sucesfully")
+      }
+
+  }
+    private inline fun runSafelyTrans(action: () ->Unit): Any{
+        return try{
+            action()
+        }catch (t: Throwable){
+            BaseResponse("98", "${t.message}")
+        }finally {
+
+        }
     }
 
 }

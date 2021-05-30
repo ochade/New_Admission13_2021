@@ -1,6 +1,5 @@
 package com.serverless.service
 
-import com.serverless.model.Admission
 import com.serverless.model.Applicant
 import com.serverless.repository.ApplicantRepositoryImplementation
 
@@ -13,7 +12,7 @@ class ApplicantService {
     fun createApplicantService(applicant: Applicant){
         applicantRepositoryImplementation.createApplicant(applicant)
     }
-    fun updateApplicationTable(admission: Admission){
+    fun updateApplicationTable(applicant: Applicant){
       //  admissionRepositoryImplementation.updateAdmission(admission)
         applicantRepositoryImplementation.updateApplicant(applicant)
     }
