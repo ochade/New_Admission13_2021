@@ -17,7 +17,7 @@ class AdmissionController {
 
       return runSafelyTrans {
          admissionService.createAdmissionTable()
-
+          return BaseResponse("00","admission Table created sucesfully")
       }
 
     }

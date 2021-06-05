@@ -23,7 +23,7 @@ class AdmissionRepositoryImplementation: AdmissionRepository {
 
     override fun createAdmissionTable() {
         val sql = "CREATE TABLE IF NOT EXISTS admission\n" +
-                " (client_id INT PRIMARY KEY AUTO_INCREMENT ,\n" +
+                " (admission_id INT PRIMARY KEY AUTO_INCREMENT ,\n" +
                 "  admission_type VARCHAR(40) NOT NULL,\n" +
                 "  admission_status VARCHAR(60) NOT NULL,\n" +
                 "  admission_description VARCHAR(20) NOT NULL)"

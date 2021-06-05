@@ -44,7 +44,9 @@ class Handler: RequestStreamHandler {
       "admission/update" -> admissionController.UpdateAdmission(request.body)
       "admission/delete" -> admissionController.deleteAdmission(request.body)
 
+
       "applicant/create" -> applicantController.createApplicant(request.body)
+      "applicant/update" -> applicantController.UpdateApplicant(request.body)
 //      "person/createprofile" ->  person.createRubiesProfile(request.body)
 //      "person/all" -> person.getAllPersons()
 //      "person/findall" -> person.getAllAgentsCustomerid(request.body)

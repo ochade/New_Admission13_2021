@@ -50,7 +50,7 @@ class ApplicantController {
 
 //
   }
-  fun UpdateApplication(request: String):Any {
+  fun UpdateApplicant(request: String):Any {
       val updateApplicantRequest = Gson().fromJson(request, UpdateApplicantRequest::class.java)
       val applicant = Applicant(
           updateApplicantRequest.applicant_admission,

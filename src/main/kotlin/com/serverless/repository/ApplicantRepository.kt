@@ -82,7 +82,19 @@ class ApplicantRepositoryImplementation: ApplicantRepository{
 
     override fun updateApplicant(applicant: Applicant) {
         try {
-            val sql = "UPDATE applicant SET applicant_admission = ?,applicant_id=?, applicant_name=?, applicant_age=?, applicant_address=?, applicant_LGA=?, applicant_sex=?, applicant_DOB=?,applicant_maritalStatus=?, applicant_citizenship=?, applicant_religion=?,  applicant_denomination=?  WHERE admission_id = ? ;"
+            val sql = "UPDATE applicant SET" +
+                    " applicant_admission = ?," +
+                    "applicant_name=?, " +
+                    "applicant_age=?," +
+                    " applicant_address=?," +
+                    " applicant_LGA=?, " +
+                    "applicant_sex=?, " +
+                    "applicant_DOB=?," +
+                    "applicant_maritalStatus=?, " +
+                    "applicant_citizenship=?, " +
+                    "applicant_religion=?, " +
+                    " applicant_denomination=? " +
+                    " WHERE applicant_id = ? ;"
             val pstmt = connection?.prepareStatement(sql)
 
             pstmt?.setString(1, applicant.applicant_admission)
@@ -96,6 +108,7 @@ class ApplicantRepositoryImplementation: ApplicantRepository{
             pstmt?.setString(9, applicant.applicant_citizenship)
             pstmt?.setString(10, applicant.applicant_religion)
             pstmt?.setString(11, applicant.applicant_denomination )
+            pstmt?.setInt(12, applicant.applicant_id!!)
             pstmt?.executeUpdate()
             print("query ran successfully")
         } catch (ex: SQLException) {
