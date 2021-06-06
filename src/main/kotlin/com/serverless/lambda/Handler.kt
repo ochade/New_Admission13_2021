@@ -4,7 +4,8 @@ import com.amazonaws.services.lambda.runtime.Context
 import com.amazonaws.services.lambda.runtime.LambdaLogger
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler
 import com.google.gson.Gson
-import com.serverless.controller.*
+import com.serverless.controller.ApplicantController
+import com.serverless.controller.UserController
 import com.serverless.controller.AdmissionController
 
 import com.serverless.lambda.request.AWSLambdaRequest
@@ -30,6 +31,7 @@ class Handler: RequestStreamHandler {
     println(path)
     val admissionController =AdmissionController()
     val applicantController = ApplicantController()
+    val userController = UserController()
 ////    val merchant: MerchantController by KoinJavaComponent.inject(MerchantController::class.java)
 ////    val customer: CustomerController by KoinJavaComponent.inject(CustomerController::class.java)
 ////    val receipts: ReceiptController by KoinJavaComponent.inject(ReceiptController::class.java)
@@ -47,6 +49,11 @@ class Handler: RequestStreamHandler {
 
       "applicant/create" -> applicantController.createApplicant(request.body)
       "applicant/update" -> applicantController.UpdateApplicant(request.body)
+
+      "user/create" -> userController.createUser(request.body)
+      "user/delete" -> userController.UpdateUser(request.body)
+      "user/finduser" -> userController.SelectUser(request.body)
+
 //      "person/createprofile" ->  person.createRubiesProfile(request.body)
 //      "person/all" -> person.getAllPersons()
 //      "person/findall" -> person.getAllAgentsCustomerid(request.body)
