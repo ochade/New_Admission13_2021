@@ -17,8 +17,9 @@ class UserService {
     fun updateUserTable(user: User){
         userRepositoryImplementation.updateUser(user)
     }
-    fun selectUser(username : String) {
-        userRepositoryImplementation.selectUser(username)
+    fun selectUser(username : String): User? {
+     return userRepositoryImplementation.selectUser(username)
+
     }
 
 }

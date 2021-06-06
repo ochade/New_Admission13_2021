@@ -52,9 +52,9 @@ class UserRepositoryImplementation: UserRepository {
             pstmt?.setString(1, user.username)
             pstmt?.setString(2, user.lastname)
             pstmt?.setString(3, user.phonenumber)
-            pstmt?.setString(4, user.password)
-            pstmt?.setString(5, user.role_id)
-            pstmt?.setString(6, user.lastname)
+            pstmt?.setString(4, user.email)
+            pstmt?.setString(5, user.password)
+            pstmt?.setString(6, user.role_id)
 
             pstmt?.executeUpdate()
             print("query ran successfully")
@@ -94,22 +94,27 @@ class UserRepositoryImplementation: UserRepository {
 
 //    }
 //
-    override fun selectUser(username : String): User? {
-    val sql = "SELECT * FROM user WHERE username = ?;"
+    override fun selectUser(username : String): User?{
+    val sql = "SELECT * FROM user WHERE username = ? LIMIT 1;"
+    var user = User(0,"","","","","","")
+
     val pstmt = connection?.prepareStatement(sql)
     pstmt?.setString(1, username)
-    try {
+     try {
         val resultset = pstmt?.executeQuery()
-        val user = User(
-            user_id = resultset?.getInt("user_id"),
-            username = resultset?.getString("username"),
-            lastname = resultset?.getString("lastname"),
-            phonenumber = resultset?.getString("phonenumber"),
-            email = resultset?.getString("email"),
-            password = resultset?.getString("password"),
-            role_id = resultset?.getString("role_id")
+    while (resultset!!.next()){
+          var user2 = User(
+            resultset.getInt("user_id"),
+            resultset.getString("username"),
+            resultset.getString("lastname"),
+            resultset.getString("phonenumber"),
+            resultset.getString("email"),
+            resultset.getString("password"),
+            resultset.getString("role_id")
         )
-        return user
+        user = user2.copy()
+}
+
     } catch (ex: SQLException) {
         ex.printStackTrace()
     } finally {
@@ -117,7 +122,7 @@ class UserRepositoryImplementation: UserRepository {
         connection?.close()
         connection = null
     }
-
+    return user
 }
 }
 

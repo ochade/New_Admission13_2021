@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.serverless.model.User
 import com.serverless.request.*
 import com.serverless.response.BaseResponse
+import com.serverless.response.SingleResponse
 import com.serverless.service.UserService
 
 class UserController {
@@ -43,12 +44,12 @@ class UserController {
     }
     fun SelectUser(request: String): Any{
         val selectUserRequest = Gson().fromJson(request, SelectUserRequest::class.java)
-        val user = User( selectUserRequest.user_id, selectUserRequest.username, selectUserRequest.lastname, selectUserRequest.phonenumber, selectUserRequest.email, selectUserRequest.password, selectUserRequest.role_id)
+
 
         return runSafelyTrans {
-            userService.selectUser(user.username!!)
+            val user =  userService.selectUser(selectUserRequest.username!!)
 
-            return BaseResponse("00","user selected successfully")
+            return SingleResponse("00","user selected successfully",user)
         }
     }
     private inline fun runSafelyTrans(action: () ->Unit): Any{

@@ -35,20 +35,22 @@ fun main(args: Array<String>) {
     val userController = UserController()
    // userController.createUserTable()
 
-    val userRequest = CreateUserRequest("nana","udo","090939494","udo@gmail.com","mini01","1")
+//    val userRequest = CreateUserRequest("nana","udo","090939494","udo@gmail.com","mini01","1")
 //    val user = User(1,userRequest.username, userRequest.lastname, userRequest.phonenumber, userRequest.email,userRequest.password, userRequest.role_id )
-
-    //val balla: String = gson.toJson(userRequest)
-
-  //  userController.createUser(balla)
-    val userupdateRequest = UpdateUserRequest(1,"nana","udo","090939494","udo02@gmail.com","RUM","2")
-
-    val user = User(1,userupdateRequest.username, userupdateRequest.lastname, userupdateRequest.phonenumber, userupdateRequest.email,userupdateRequest.password, userupdateRequest.role_id )
-
-    val balla: String = gson.toJson(userupdateRequest)
-    userController.UpdateUser(balla)
-
+//
+//    val balla: String = gson.toJson(userRequest)
+//
+//    userController.createUser(balla)
+//    val userupdateRequest = UpdateUserRequest(1,"nana","udo","090939494","udo02@gmail.com","RUM","2")
+//
+//    val user = User(1,userupdateRequest.username, userupdateRequest.lastname, userupdateRequest.phonenumber, userupdateRequest.email,userupdateRequest.password, userupdateRequest.role_id )
     val selectUserRequest = SelectUserRequest("nana")
+    val balla: String = gson.toJson(selectUserRequest)
+
+    println(userController.SelectUser(balla))
+
+
+
 
 
 
