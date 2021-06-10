@@ -1,7 +1,7 @@
 package com.serverless.model
 
 data class Applicant(
-    var applicant_admission: String?,
+    var admission_id: Int?,
     var applicant_id: Int?,
     var applicant_name: String?,
     var applicant_age: String?,

@@ -3,6 +3,7 @@ package com.serverless.model
 data class User(
     var user_id: Int?,
     var username:String?,
+    var firstname: String?,
     var lastname:String?,
     var phonenumber:String?,
     var email: String?,

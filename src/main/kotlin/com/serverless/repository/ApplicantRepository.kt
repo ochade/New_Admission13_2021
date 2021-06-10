@@ -11,6 +11,7 @@ interface ApplicantRepository{
     fun createApplicantTable()
     fun createApplicant(applicant: Applicant)
     fun updateApplicant(applicant: Applicant)
+    fun selectAllApplicantAndAdmission()
 }
 class ApplicantRepositoryImplementation: ApplicantRepository{
     var connection: Connection? = DatabaseManager.getConnection()
@@ -19,7 +20,7 @@ class ApplicantRepositoryImplementation: ApplicantRepository{
     override fun createApplicantTable(){
         val sql = "CREATE TABLE IF NOT EXISTS applicant\n" +
                 " (applicant_id INT PRIMARY KEY AUTO_INCREMENT ,\n" +
-                "  applicant_admission VARCHAR(40),\n" +
+                "  admission_id INT FOREIGN KEY REFERENCES admission(admission_id) ON DELETE CASCADE ,\n" +
                 "  applicant_name VARCHAR(60) NOT NULL,\n" +
                 "  applicant_age VARCHAR(20) NOT NULL,\n"+
                 "  applicant_address VARCHAR(60) NOT NULL,\n" +
@@ -53,7 +54,7 @@ class ApplicantRepositoryImplementation: ApplicantRepository{
 
         try {
 
-            pstmt?.setString(1, applicant.applicant_admission)
+            pstmt?.setInt(1, applicant.admission_id!!)
             pstmt?.setString(2, applicant.applicant_name)
             pstmt?.setString(3, applicant.applicant_age)
             pstmt?.setString(4, applicant.applicant_address.toString())
@@ -97,7 +98,7 @@ class ApplicantRepositoryImplementation: ApplicantRepository{
                     " WHERE applicant_id = ? ;"
             val pstmt = connection?.prepareStatement(sql)
 
-            pstmt?.setString(1, applicant.applicant_admission)
+            pstmt?.setInt(1, applicant.admission_id!!)
             pstmt?.setString(2, applicant.applicant_name)
             pstmt?.setString(3, applicant.applicant_age)
             pstmt?.setString(4, applicant.applicant_address)
@@ -121,4 +122,8 @@ class ApplicantRepositoryImplementation: ApplicantRepository{
         }
     }
 
+    override fun selectAllApplicantAndAdmission() {
+
     }
+
+}

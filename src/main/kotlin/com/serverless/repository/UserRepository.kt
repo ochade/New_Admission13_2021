@@ -106,6 +106,7 @@ class UserRepositoryImplementation: UserRepository {
           var user2 = User(
             resultset.getInt("user_id"),
             resultset.getString("username"),
+              resultset.getString("firstname"),
             resultset.getString("lastname"),
             resultset.getString("phonenumber"),
             resultset.getString("email"),

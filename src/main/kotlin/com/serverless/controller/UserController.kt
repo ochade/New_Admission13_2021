@@ -2,10 +2,14 @@ package com.serverless.controller
 
 import com.google.gson.Gson
 import com.serverless.model.User
+import com.serverless.repository.ApplicantRepositoryImplementation
 import com.serverless.request.*
 import com.serverless.response.BaseResponse
 import com.serverless.response.SingleResponse
+import com.serverless.service.AuthService
 import com.serverless.service.UserService
+import java.lang.IllegalArgumentException
+import java.lang.IllegalStateException
 
 class UserController {
     private val userService = UserService()
@@ -23,7 +27,7 @@ class UserController {
         // val createClientRequest = Gson().fromJson(request, CreateClientRequest::class.java)
 
         val createUserRequest = Gson().fromJson(request, CreateUserRequest::class.java)
-        val user = User(0, createUserRequest.username, createUserRequest.lastname, createUserRequest.phonenumber, createUserRequest.email,createUserRequest.password, createUserRequest.role_id )
+        val user = User(0, createUserRequest.username, createUserRequest.firstname, createUserRequest.lastname, createUserRequest.phonenumber, createUserRequest.email,createUserRequest.password, createUserRequest.role_id )
 
         return runSafelyTrans {
             userService.createUserService(user)
@@ -35,21 +39,31 @@ class UserController {
         val updateUserRequest = Gson().fromJson(request, UpdateUserRequest::class.java)
        // val user = User(updateAdmissionRequest.admission_id,updateAdmissionRequest.admisssion_type,updateAdmissionRequest.admission_status,updateAdmissionRequest.admission_description)
 
-        val user = User(updateUserRequest.user_id, updateUserRequest.username, updateUserRequest.lastname, updateUserRequest.phonenumber, updateUserRequest.email, updateUserRequest.password, updateUserRequest.role_id )
+        val user = User(updateUserRequest.user_id, updateUserRequest.username, updateUserRequest.firstname , updateUserRequest.lastname, updateUserRequest.phonenumber, updateUserRequest.email, updateUserRequest.password, updateUserRequest.role_id )
         return runSafelyTrans {
             userService.updateUserTable(user)
 
             return BaseResponse("00","user updated sucesfully")
         }
     }
-    fun SelectUser(request: String): Any{
-        val selectUserRequest = Gson().fromJson(request, SelectUserRequest::class.java)
-
+    fun Login(request: String): Any{
+        val loginRequest = Gson().fromJson(request, LoginRequest::class.java)
+        val authService = AuthService()
+        val applicantRepository = ApplicantRepositoryImplementation()
 
         return runSafelyTrans {
-            val user =  userService.selectUser(selectUserRequest.username!!)
+            val isUser =  userService.selectUser(loginRequest.username!!) ?: throw(IllegalStateException("username not found"))
+            if(isUser.password == loginRequest.password){
 
-            return SingleResponse("00","user selected successfully",user)
+
+                val token = AuthService().generateJWT(isUser,applicantRepository.selectAllApplicantAndAdmission())
+                // create a response
+                // pass the response to the applicants
+                // return token
+            }else{
+                throw(IllegalArgumentException("Incorrect Password"))
+            }
+          //  return SingleResponse("00","user selected successfully",user)
         }
     }
     private inline fun runSafelyTrans(action: () ->Unit): Any{

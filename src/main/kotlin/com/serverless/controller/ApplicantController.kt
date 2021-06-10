@@ -29,7 +29,7 @@ class ApplicantController {
    // val admission = Admission(0,createAdmissionRequest.admisssion_type, createAdmissionRequest.admission_status,createAdmissionRequest.admission_description)
     val createApplicantRequest = Gson().fromJson(request, CreateApplicantRequest::class.java)
     val applicant = Applicant(
-        createApplicantRequest.applicant_admission,
+        createApplicantRequest.admission_id,
         0,
         createApplicantRequest.applicant_name,
         createApplicantRequest.applicant_age,
@@ -53,7 +53,7 @@ class ApplicantController {
   fun UpdateApplicant(request: String):Any {
       val updateApplicantRequest = Gson().fromJson(request, UpdateApplicantRequest::class.java)
       val applicant = Applicant(
-          updateApplicantRequest.applicant_admission,
+          updateApplicantRequest.admission_id,
           updateApplicantRequest.applicant_id,
           updateApplicantRequest.applicant_name,
           updateApplicantRequest.applicant_age,
