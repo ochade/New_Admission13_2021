@@ -11,9 +11,9 @@ class AuthService(private val userService: UserService) {
 
     private val JWT_KEY = "DummyKeyStringDummyKeyStringDummyKeyStringDummyKeyStringDummyKeyStringDummyKeyStrings"
 
-    fun generateJWT(user : User, applicant: List<Applicant>) : String{
+    fun generateJWT(user : User) : String{
         val key = Keys.hmacShaKeyFor(JWT_KEY.toByteArray())
-        val claims = hashMapOf(
+        val claims = mapOf(
             "userid" to user.user_id,
             "email" to user.username,
             "firstname" to user.firstname,
@@ -21,7 +21,6 @@ class AuthService(private val userService: UserService) {
             "mobilenumber" to user.phonenumber ,
             "customerid" to user.email ,
             "status" to user.password ,
-            "applicants" to applicant.map { it.applicant_id },
             "key" to "value")
         return Jwts.builder().addClaims(claims).signWith(key).compact()
     }

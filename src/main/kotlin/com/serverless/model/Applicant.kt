@@ -4,6 +4,8 @@ data class Applicant(
     var admission_id: Int?,
     var applicant_id: Int?,
     var applicant_name: String?,
+    var applicant_email: String?,
+    var applicant_phonenumber: String?,
     var applicant_age: String?,
     var applicant_address: String?,
     var applicant_LGA: String?,
@@ -13,5 +15,6 @@ data class Applicant(
     var applicant_citizenship:String?,
     var applicant_religion: String?,
     var applicant_denomination: String?,
+    var Applicant_status: String?
 
     )

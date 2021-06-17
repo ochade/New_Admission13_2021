@@ -22,6 +22,8 @@ class ApplicantRepositoryImplementation: ApplicantRepository{
                 " (applicant_id INT PRIMARY KEY AUTO_INCREMENT ,\n" +
                 "  admission_id INT FOREIGN KEY REFERENCES admission(admission_id) ON DELETE CASCADE ,\n" +
                 "  applicant_name VARCHAR(60) NOT NULL,\n" +
+                "  applicant_email VARCHAR(60) NOT NULL,\n" +
+                "  applicant_phonenumber VARCHAR(60) NOT NULL,\n" +
                 "  applicant_age VARCHAR(20) NOT NULL,\n"+
                 "  applicant_address VARCHAR(60) NOT NULL,\n" +
                 "  applicant_lga VARCHAR(40) NOT NULL,\n" +
@@ -30,7 +32,9 @@ class ApplicantRepositoryImplementation: ApplicantRepository{
                 "  applicant_maritalStatus VARCHAR(40) NOT NULL,\n" +
                 "  applicant_citizenship VARCHAR(60) NOT NULL,\n" +
                 "  applicant_religion VARCHAR(20) NOT NULL,\n"+
-                "  applicant_denomination VARCHAR(20) NOT NULL)"
+                "  applicant_denomination VARCHAR(20) NOT NULL),\n" +
+                "  applicant_status VARCHAR(60) NOT NULL,\n" +
+                " CREATED_DATE timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP"
 
 
         val pstmt = connection?.prepareStatement(sql)

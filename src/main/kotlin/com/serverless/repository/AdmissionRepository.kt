@@ -26,6 +26,7 @@ class AdmissionRepositoryImplementation: AdmissionRepository {
                 " (admission_id INT PRIMARY KEY AUTO_INCREMENT ,\n" +
                 "  admission_type VARCHAR(40) NOT NULL,\n" +
                 "  admission_status VARCHAR(60) NOT NULL,\n" +
+                " CREATED_DATE timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP," +
                 "  admission_description VARCHAR(20) NOT NULL)"
         val pstmt = connection?.prepareStatement(sql)
         try {

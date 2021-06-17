@@ -5,6 +5,7 @@ import com.serverless.model.User
 import com.serverless.repository.ApplicantRepositoryImplementation
 import com.serverless.request.*
 import com.serverless.response.BaseResponse
+import com.serverless.response.LoginResponse
 import com.serverless.response.SingleResponse
 import com.serverless.service.AuthService
 import com.serverless.service.UserService
@@ -48,7 +49,8 @@ class UserController {
     }
     fun Login(request: String): Any{
         val loginRequest = Gson().fromJson(request, LoginRequest::class.java)
-        val authService = AuthService()
+        val userService = UserService()
+        val authService = AuthService(userService)
         val applicantRepository = ApplicantRepositoryImplementation()
 
         return runSafelyTrans {
@@ -56,14 +58,15 @@ class UserController {
             if(isUser.password == loginRequest.password){
 
 
-                val token = AuthService().generateJWT(isUser,applicantRepository.selectAllApplicantAndAdmission())
+                val token = authService.generateJWT(isUser)
                 // create a response
                 // pass the response to the applicants
                 // return token
+                return LoginResponse("00","user selected successfully","", isUser.firstname)
             }else{
                 throw(IllegalArgumentException("Incorrect Password"))
             }
-          //  return SingleResponse("00","user selected successfully",user)
+            return LoginResponse("00","user selected successfully","",1,"fisayo","fisayo","brume","85392020293","fisayobrume@gmail.com","dracaris","2")
         }
     }
     private inline fun runSafelyTrans(action: () ->Unit): Any{

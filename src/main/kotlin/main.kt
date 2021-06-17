@@ -21,8 +21,9 @@ fun main(args: Array<String>) {
 //    admissioncontroller.createAdmission(admission)
 ////
 //    admissioncontroller.deleteAdmission(deleteAdmissionRequest.toString())
-//    val applicantController = ApplicantController()
-////    applicantController.createApplicantTable()
+    val applicantController = ApplicantController()
+    applicantController.createApplicantTable()
+    print("ham")
 //
 //    val applicantRequest = UpdateApplicantRequest("1",1,"brume","16","no 4 christiana street","ndokwa east","female","09-01-20021","married","Nigerian","christian","catholic")
 //
@@ -44,10 +45,10 @@ fun main(args: Array<String>) {
 //    val userupdateRequest = UpdateUserRequest(1,"nana","udo","090939494","udo02@gmail.com","RUM","2")
 //
 //    val user = User(1,userupdateRequest.username, userupdateRequest.lastname, userupdateRequest.phonenumber, userupdateRequest.email,userupdateRequest.password, userupdateRequest.role_id )
-    val selectUserRequest = SelectUserRequest("nana")
-    val balla: String = gson.toJson(selectUserRequest)
+//    val selectUserRequest = SelectUserRequest("nana")
+//    val balla: String = gson.toJson(selectUserRequest)
 
-    println(userController.SelectUser(balla))
+ //   println(userController.SelectUser(balla))
 
 
 
