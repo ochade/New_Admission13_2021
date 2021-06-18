@@ -20,7 +20,7 @@ class ApplicantRepositoryImplementation: ApplicantRepository{
     override fun createApplicantTable(){
         val sql = "CREATE TABLE IF NOT EXISTS applicant\n" +
                 " (applicant_id INT PRIMARY KEY AUTO_INCREMENT ,\n" +
-                "  admission_id INT FOREIGN KEY REFERENCES admission(admission_id) ON DELETE CASCADE ,\n" +
+                "  admission_id INT ,\n" +
                 "  applicant_name VARCHAR(60) NOT NULL,\n" +
                 "  applicant_email VARCHAR(60) NOT NULL,\n" +
                 "  applicant_phonenumber VARCHAR(60) NOT NULL,\n" +
@@ -32,9 +32,10 @@ class ApplicantRepositoryImplementation: ApplicantRepository{
                 "  applicant_maritalStatus VARCHAR(40) NOT NULL,\n" +
                 "  applicant_citizenship VARCHAR(60) NOT NULL,\n" +
                 "  applicant_religion VARCHAR(20) NOT NULL,\n"+
-                "  applicant_denomination VARCHAR(20) NOT NULL),\n" +
+                "  applicant_denomination VARCHAR(20) NOT NULL,\n" +
                 "  applicant_status VARCHAR(60) NOT NULL,\n" +
-                " CREATED_DATE timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP"
+                " CREATED_DATE timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP," +
+                "FOREIGN KEY (admission_id) REFERENCES admission(admission_id) ON DELETE CASCADE )"
 
 
         val pstmt = connection?.prepareStatement(sql)
@@ -60,7 +61,7 @@ class ApplicantRepositoryImplementation: ApplicantRepository{
 
             pstmt?.setInt(1, applicant.admission_id!!)
             pstmt?.setString(2, applicant.applicant_name)
-            pstmt?.setString(3, applicant.applicant_age)
+            pstmt?.setInt(3, applicant.applicant_age!!)
             pstmt?.setString(4, applicant.applicant_address.toString())
             pstmt?.setString(5, applicant.applicant_LGA)
             pstmt?.setString(6, applicant.applicant_sex)
@@ -104,7 +105,7 @@ class ApplicantRepositoryImplementation: ApplicantRepository{
 
             pstmt?.setInt(1, applicant.admission_id!!)
             pstmt?.setString(2, applicant.applicant_name)
-            pstmt?.setString(3, applicant.applicant_age)
+            pstmt?.setInt(3, applicant.applicant_age!!)
             pstmt?.setString(4, applicant.applicant_address)
             pstmt?.setString(5, applicant.applicant_LGA)
             pstmt?.setString(6, applicant.applicant_sex)

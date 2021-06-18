@@ -27,21 +27,21 @@ class AdmissionController {
        // val createClientRequest = Gson().fromJson(request, CreateClientRequest::class.java)
         println(request)
         val createAdmissionRequest = Gson().fromJson(request, CreateAdmissionRequest::class.java)
-        val admission = Admission(0,createAdmissionRequest.admisssion_type, createAdmissionRequest.admission_status,createAdmissionRequest.admission_description)
+    //    val admission = Admission(0,createAdmissionRequest.admisssion_type, createAdmissionRequest.admission_status,createAdmissionRequest.admission_description)
 
 //        val client = Client(0,createClientRequest.client_name,createClientRequest.address,createClientRequest.industry)
 //        clientService.createClientsService(client)
       return runSafelyTrans {
-          admissionService.createAdmissionService(admission)
+  //        admissionService.createAdmissionService(admission)
           return BaseResponse("00","admission created sucesfully")
       }
 //
     }
     fun UpdateAdmission(request: String):Any{
         val updateAdmissionRequest = Gson().fromJson(request, UpdateAdmissionRequest::class.java)
-        val admission = Admission(updateAdmissionRequest.admission_id,updateAdmissionRequest.admisssion_type,updateAdmissionRequest.admission_status,updateAdmissionRequest.admission_description)
+ //       val admission = Admission(updateAdmissionRequest.admission_id,updateAdmissionRequest.admisssion_type,updateAdmissionRequest.admission_status,updateAdmissionRequest.admission_description)
         return runSafelyTrans {
-            admissionService.updateAdmissionTable(admission)
+  //          admissionService.updateAdmissionTable(admission)
 
             return BaseResponse("00","admission updated sucesfully")
         }
@@ -55,8 +55,8 @@ class AdmissionController {
 //    }
     fun selectAllAdmission(): Any{
        return runSafelyTrans {
-           val admission = admissionService.selectAllAdmission()
-           return ListResponse("00","successful",admission)
+     //      val admission = admissionService.selectAllAdmission()
+     //      return ListResponse("00","successful",admission)
        }
     }
 //    fun selectAllAdmission(): Any{

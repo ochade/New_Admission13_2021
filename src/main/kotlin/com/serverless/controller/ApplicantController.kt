@@ -29,9 +29,11 @@ class ApplicantController {
    // val admission = Admission(0,createAdmissionRequest.admisssion_type, createAdmissionRequest.admission_status,createAdmissionRequest.admission_description)
     val createApplicantRequest = Gson().fromJson(request, CreateApplicantRequest::class.java)
     val applicant = Applicant(
-        createApplicantRequest.admission_id,
+        createApplicantRequest.admission_id ,
         0,
         createApplicantRequest.applicant_name,
+        createApplicantRequest.applicant_email,
+        createApplicantRequest.applicant_phonenumber,
         createApplicantRequest.applicant_age,
         createApplicantRequest.applicant_address,
         createApplicantRequest.applicant_LGA,
@@ -40,7 +42,8 @@ class ApplicantController {
         createApplicantRequest.applicant_maritalStatus,
         createApplicantRequest.applicant_citizenship,
         createApplicantRequest.applicant_religion,
-        createApplicantRequest.applicant_denomination
+        createApplicantRequest.applicant_denomination,
+        createApplicantRequest.applicant_status
 
     )
 
@@ -56,15 +59,18 @@ class ApplicantController {
           updateApplicantRequest.admission_id,
           updateApplicantRequest.applicant_id,
           updateApplicantRequest.applicant_name,
+          updateApplicantRequest.applicant_email,
+          updateApplicantRequest.applicant_phonenumber,
           updateApplicantRequest.applicant_age,
           updateApplicantRequest.applicant_address,
-          updateApplicantRequest.applicant_LGA,
+          updateApplicantRequest.applicant_LGA ,
           updateApplicantRequest.applicant_sex,
           updateApplicantRequest.applicant_DOB,
           updateApplicantRequest.applicant_maritalStatus,
           updateApplicantRequest.applicant_citizenship,
           updateApplicantRequest.applicant_religion,
-          updateApplicantRequest.applicant_denomination
+          updateApplicantRequest.applicant_denomination,
+          updateApplicantRequest.applicant_status
       )
       return runSafelyTrans {
           // admissionService.updateAdmissionTable(admission)

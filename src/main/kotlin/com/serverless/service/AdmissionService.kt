@@ -10,17 +10,17 @@ class AdmissionService {
         admissionRepositoryImplementation.createAdmissionTable()
     }
     fun createAdmissionService(admission: Admission){
-        admissionRepositoryImplementation.createAdmission(admission)
+      //  admissionRepositoryImplementation.createAdmission(admission)
     }
     fun updateAdmissionTable(admission: Admission){
-        admissionRepositoryImplementation.updateAdmission(admission)
+      //  admissionRepositoryImplementation.updateAdmission(admission)
     }
-    fun selectAllAdmission():List<Admission>{
-        return admissionRepositoryImplementation.selectAllAdmission()
+  //  fun selectAllAdmission():List<Admission>{
+       // return admissionRepositoryImplementation.selectAllAdmission()
 
-    }
+//    }
     fun deleteAdmissionTable(admission_id:Int){
-        admissionRepositoryImplementation.deleteAdmission(admission_id=3)
+//        admissionRepositoryImplementation.deleteAdmission(admission_id=3)
     }
 
 }

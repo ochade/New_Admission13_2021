@@ -4,11 +4,15 @@ import javax.validation.constraints.NotEmpty
 
 data class CreateApplicantRequest(
     @get:NotEmpty(message = "admission type is required")
-    val applicant_admission:String?,
+    val admission_id: Int?,
     @get:NotEmpty(message = "admission name is required")
     val applicant_name:String?,
     @get:NotEmpty(message = "admission age is required")
-    val applicant_age:String?,
+    val applicant_email:String?,
+    @get:NotEmpty(message = "admission age is required")
+    val applicant_phonenumber:String?,
+    @get:NotEmpty(message = "admission address is required")
+    val applicant_age:Int?,
     @get:NotEmpty(message = "admission address is required")
     val applicant_address:String?,
     @get:NotEmpty(message = "admission LGA is required")
@@ -25,6 +29,8 @@ data class CreateApplicantRequest(
     val applicant_religion:String?,
     @get:NotEmpty(message = "admission denomination is required")
     val applicant_denomination:String?,
+    @get:NotEmpty(message = "admission denomination is required")
+    val applicant_status :String?,
 
 
 

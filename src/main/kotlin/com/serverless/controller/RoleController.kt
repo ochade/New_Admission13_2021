@@ -17,7 +17,7 @@ class RoleController {
         return runSafelyTrans {
             roleService.createRoleTable()
 
-            return BaseResponse("00","role Table created sucesfully")
+           // return BaseResponse("00","role Table created sucesfully")
         }
 
     }
@@ -32,18 +32,18 @@ class RoleController {
 
         return runSafelyTrans {
             roleService.createRoleService(role)
-            return BaseResponse("00","admission created sucesfully")
+       //     return BaseResponse("00","admission created sucesfully")
         }
 
-    private inline fun runSafelyTrans(action: () ->Unit): Any{
-        return try{
-            action()
-        }catch (t: Throwable){
-            BaseResponse("98", "${t.message}")
-        }finally {
-
-        }
-    }
+  //  private inline fun runSafelyTrans(action: () ->Unit): Any{
+//        return try{
+//            action()
+//        }catch (t: Throwable){
+//            BaseResponse("98", "${t.message}")
+//        }finally {
+//
+//        }
+//    }
 }
 
     private fun runSafelyTrans(action: () ->Unit): Any {

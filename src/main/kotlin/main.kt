@@ -15,10 +15,10 @@ fun main(args: Array<String>) {
 //    val deleteAdmissionRequest= DeleteAdmissionRequest("5")
  //   val admissionRequest = CreateAdmissionRequest("undergraduate","available", "public health")
 //   val admissioncontroller = AdmissionController()
-//// admissioncontroller.createAdmissionTable()
+//   admissioncontroller.createAdmissionTable()
 //
 //    val admission = Admission(5, admissionRequest.admisssion_type, admissionRequest.admission_status, admissionRequest.admission_description)
-//    admissioncontroller.createAdmission(admission)
+//    admissioncontroller.createAdmissixon(admission)
 ////
 //    admissioncontroller.deleteAdmission(deleteAdmissionRequest.toString())
     val applicantController = ApplicantController()
@@ -33,7 +33,7 @@ fun main(args: Array<String>) {
 
 //    applicantController.UpdateApplicant(request = balla)
 //
-    val userController = UserController()
+//    val userController = UserController()
    // userController.createUserTable()
 
 //    val userRequest = CreateUserRequest("nana","udo","090939494","udo@gmail.com","mini01","1")
@@ -50,7 +50,7 @@ fun main(args: Array<String>) {
 
  //   println(userController.SelectUser(balla))
 
-
+     main()
 
 
 
@@ -58,4 +58,6 @@ fun main(args: Array<String>) {
   //  DatabaseManager.getConnection()
 
 }
-
+fun main() {
+    println("hbjshj")
+}

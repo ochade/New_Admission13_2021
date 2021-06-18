@@ -52,7 +52,7 @@ class Handler: RequestStreamHandler {
 
       "user/create" -> userController.createUser(request.body)
       "user/delete" -> userController.UpdateUser(request.body)
-      "user/finduser" -> userController.SelectUser(request.body)
+ //     "user/finduser" -> userController.SelectUser(request.body)
 
 //      "person/createprofile" ->  person.createRubiesProfile(request.body)
 //      "person/all" -> person.getAllPersons()

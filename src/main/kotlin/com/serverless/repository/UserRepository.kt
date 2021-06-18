@@ -96,7 +96,7 @@ class UserRepositoryImplementation: UserRepository {
 //
     override fun selectUser(username : String): User?{
     val sql = "SELECT * FROM user WHERE username = ? LIMIT 1;"
-    var user = User(0,"","","","","","")
+    var user = User(0,"","","","","","","")
 
     val pstmt = connection?.prepareStatement(sql)
     pstmt?.setString(1, username)
